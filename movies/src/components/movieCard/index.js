@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid2"; 
 import img from '../../images/film-poster-placeholder.png';
 import {Link} from "react-router-dom"
