@@ -3,10 +3,11 @@ import { getUpcomingMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import AddToPalylist from '../components/cardIcons/addToPlaylist'
+import AddToPalylist from '../components/cardIcons/addToPlaylist';
+
 
 const UpcomingPage = (props) => {
-    const { data, error, isLoading, isError } = useQuery('discover', getUpcomingMovies)
+    const { data, error, isLoading, isError } = useQuery('upcoming', getUpcomingMovies)
 
     if (isLoading) {
         return <Spinner />
@@ -17,8 +18,9 @@ const UpcomingPage = (props) => {
     }
     const upcomings = data.results;
 
-    const favorites = upcomings.filter(m => m.favorites)
-    localStorage.setItem('favourite', JSON.stringify(favorites))
+    const mustWatchs = upcomings.filter(m => m.mustWatch)
+    localStorage.setItem('must watch', JSON.stringify(mustWatchs))
+    console.log(mustWatchs)
     
 
     return (

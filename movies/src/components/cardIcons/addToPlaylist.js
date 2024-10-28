@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 
 
-const AddToPalylist = ({ movie }) => {
+const AddToPlaylist = ({ movie }) => {
   const context = useContext(MoviesContext);
 
   const handleAddToPlaylist = (e) => {
@@ -19,4 +19,4 @@ const AddToPalylist = ({ movie }) => {
   );
 };
 
-export default AddToPalylist;
+export default AddToPlaylist;
