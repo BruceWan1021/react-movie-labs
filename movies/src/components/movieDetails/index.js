@@ -10,6 +10,8 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import { useQuery } from "react-query";
+import { getMovieActors } from "../../api/tmdb-api";
 
 const root = {
     display: "flex",
@@ -24,6 +26,21 @@ const chip = { margin: 0.5 };
 
 const MovieDetails = ({ movie }) => { 
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const { data, error, isLoading, isError } = useQuery(
+      ["movieActors", { id: movie.id}],
+      getMovieActors
+    )
+
+    if (isLoading) {
+      return <p>Loading...</p>
+    }
+
+    if (isError) {
+      return <p>{error.message}</p>
+    }
+
+    const actors = data.cast || [];
   
     return (
       <>
@@ -59,6 +76,20 @@ const MovieDetails = ({ movie }) => {
             label={`${movie.vote_average} (${movie.vote_count}`}
           />
           <Chip label={`Released: ${movie.release_date}`} />
+        </Paper>
+
+        <Paper
+         component="ul" 
+         sx={{...root}}>
+          <li>
+            <Chip label="Actors" sx={{...chip}} color="primary" />
+          </li>
+          {actors.map((actors) => (
+            <li key={actors.id}>
+              <Chip label={actors.name} sx={{...chip}} />
+            </li>
+          ))}
+
         </Paper>
 
       
