@@ -12,10 +12,11 @@ import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
 import { useQuery } from "react-query";
 import { getMovieActors } from "../../api/tmdb-api";
+import {Link} from "react-router-dom"
 
 const root = {
     display: "flex",
-    justifyContent: "center",
+    // justifyContent: "center",
     flexWrap: "wrap",
     listStyle: "none",
     padding: 1.5,
@@ -41,7 +42,7 @@ const MovieDetails = ({ movie }) => {
     }
 
     const actors = data.cast || [];
-  
+
     return (
       <>
         <Typography variant="h5" component="h3">
@@ -77,6 +78,7 @@ const MovieDetails = ({ movie }) => {
           />
           <Chip label={`Released: ${movie.release_date}`} />
         </Paper>
+        
 
         <Paper
          component="ul" 
@@ -84,15 +86,15 @@ const MovieDetails = ({ movie }) => {
           <li>
             <Chip label="Actors" sx={{...chip}} color="primary" />
           </li>
-          {actors.map((actors) => (
+          {actors.slice(0, 10).map((actors) => (
             <li key={actors.id}>
-              <Chip label={actors.name} sx={{...chip}} />
+              <Link to={`/actors/${actors.id}`}>
+                <Chip label={actors.name} sx={{...chip}}/>
+              </Link> 
             </li>
           ))}
-
         </Paper>
-
-      
+     
         <Paper 
           component="ul" 
           sx={{...root}}
@@ -100,9 +102,9 @@ const MovieDetails = ({ movie }) => {
           <li>
             <Chip label="Production Countries"  sx={{...chip}} color="primary" />
           </li>
-          {movie.production_countries.map((c) => (
-            <li key={c.name}>
-              <Chip label={c.name} sx={{...chip}} />
+          {movie.production_countries.map((production_countries) => (
+            <li key={production_countries.name}>
+              <Chip label={production_countries.name} sx={{...chip}} />
             </li>
           ))}
         </Paper>

@@ -9,8 +9,8 @@ Name: Zhenyang Wan
 ### Features.
 [ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
 
-+ Feature 1
-+ Feature 2
++ add actor list into movie details
++ click actor and jump to actor details
 + Feature 3
 + etc
 + etc
@@ -93,6 +93,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 [ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
 + Now playing movies - movie/nowplaying
++ Actor Details  - actor/:id
++ Actor image  - actor/:id/image
++ Actor movie credits  - actor/:id/movielist
 
 e.g.
 + Discover list of movies - discover/movie
@@ -104,8 +107,8 @@ e.g.
 
 [ List the __new routes__ supported by your app and state the associated page.]
 
-+ /blogs - displays all published blogs.
-+ /blogs/:id - displays a particular blog.
++ /movies/nowplaying - displays all now playing movies.
++ /actors/:id - displays an actor's detail
 + /blogs/:id/comments - detail view of a particular blog and its comments.
 + etc.
 
