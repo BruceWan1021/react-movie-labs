@@ -130,7 +130,7 @@
 // const rootElement = createRoot( document.getElementById("root") )
 // rootElement.render(<App />);
 
-import React from "react";
+import React,{ useState, useEffect }  from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
@@ -145,8 +145,26 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import UpcomingPage from './pages/upcomingPage'
 import NowPlayingPage from "./pages/nowPlayingPage";
 import ActorDetails from "./pages/actorDetailsPage";
+import LoginPage from "./pages/loginPage";
+import PopularPage from "./pages/popularPage"
 
 const App = () => {
+
+  const [sessionId, setSessionId] = useState(() => sessionStorage.getItem('sessionId') || '');
+  const [isAuthenticated, setIsAuthenticated] = useState(!!sessionId);
+
+  useEffect(() => {
+    if (sessionId) {
+      setIsAuthenticated(true);
+    }
+  }, [sessionId]);
+
+  const handleLogout = () => {
+    setSessionId('');
+    sessionStorage.removeItem('sessionId');
+    setIsAuthenticated(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -162,6 +180,8 @@ const App = () => {
           <Route path="/movies/upcoming" element={ <UpcomingPage /> } />
           <Route path="/movies/nowplaying" element={ <NowPlayingPage /> } />
           <Route path="/actors/:id" element={<ActorDetails /> } />
+          <Route path="/movies/popular" element={<PopularPage /> } />
+          <Route path="/login" element={<LoginPage setSessionId={setSessionId} setIsAuthenticated={setIsAuthenticated}/>} />
         </Routes>
         </MoviesContextProvider>  
       </BrowserRouter>

@@ -97,6 +97,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 + Actor image  - actor/:id/image
 + Actor movie credits  - actor/:id/movielist
 
+
 e.g.
 + Discover list of movies - discover/movie
 + Movie details - movie/:id
