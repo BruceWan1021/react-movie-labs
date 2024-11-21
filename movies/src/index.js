@@ -147,6 +147,7 @@ import NowPlayingPage from "./pages/nowPlayingPage";
 import ActorDetails from "./pages/actorDetailsPage";
 import LoginPage from "./pages/loginPage";
 import PopularPage from "./pages/popularPage"
+import WatchListPage from './pages/watchListPage'
 
 const App = () => {
 
@@ -182,6 +183,7 @@ const App = () => {
           <Route path="/actors/:id" element={<ActorDetails /> } />
           <Route path="/movies/popular" element={<PopularPage /> } />
           <Route path="/login" element={<LoginPage setSessionId={setSessionId} setIsAuthenticated={setIsAuthenticated}/>} />
+          <Route path="/movies/watchlist" element={<WatchListPage /> } />
         </Routes>
         </MoviesContextProvider>  
       </BrowserRouter>

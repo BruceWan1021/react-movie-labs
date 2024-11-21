@@ -32,14 +32,13 @@ const SiteHeader = () => {
 
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "NowPlaying", path: "/movies/nowplaying" },
   ];
 
-  const handleMenuSelect = (pageURL) => {
-    navigate(pageURL, { replace: true });
-  };
+    const handleMenuSelect = (pageURL) => {
+      navigate(pageURL, { replace: true });
+    };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -180,9 +179,15 @@ const SiteHeader = () => {
               horizontal: "center",
             }}
           >
-            <MenuItem onClick={handleLoginOrLogout}>
-              {isAuthenticated ? "Logout" : "Login"} 
-            </MenuItem>
+            {isAuthenticated ? (
+              [
+                <MenuItem key="favourites" onClick={() => navigate("/movies/favorites")}>FAVOURITES</MenuItem>,
+                <MenuItem key="watchlist" onClick={() => navigate("/movies/watchlist")}>WATCHLIST</MenuItem>,
+                <MenuItem key="logout" onClick={handleLoginOrLogout}>LOGOUT</MenuItem>
+              ]
+            ) : (
+              <MenuItem key="login" onClick={handleLoginOrLogout}>LOGIN</MenuItem>
+            )}
           </Menu>
         </Toolbar>
       </AppBar>

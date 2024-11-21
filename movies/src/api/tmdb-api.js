@@ -274,3 +274,93 @@ export const getMovies = () => {
         throw error;
       });
   };
+
+  export const getFavouriteMovies = (sessionId) => {
+    return fetch(
+      `https://api.themoviedb.org/3/account/me/favorite/movies?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((error) => {
+            throw new Error(error.status_message || "Something went wrong");
+          });
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  export const getWatchistMovies = (sessionId) => {
+    return fetch(
+      `https://api.themoviedb.org/3/account/me/watchlist/movies?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((error) => {
+            throw new Error(error.status_message || "Something went wrong");
+          });
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  export const toggleFavorite = (sessionId, movieId, isFavorite) => {
+    return fetch(
+      `https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          media_type: "movie",
+          media_id: movieId,
+          favorite: isFavorite, 
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status_code) {
+          throw new Error(data.status_message || "Something went wrong");
+        }
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error toggling favorite:", error);
+        throw error;
+      });
+  };
+  
+  export const toggleWatchlist = (sessionId, movieId, isWatchlist) => {
+    return fetch(
+      `https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          media_type: "movie",
+          media_id: movieId,
+          watchlist: isWatchlist, 
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status_code) {
+          throw new Error(data.status_message || "Something went wrong");
+        }
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error toggling watchlist:", error);
+        throw error;
+      });
+  };

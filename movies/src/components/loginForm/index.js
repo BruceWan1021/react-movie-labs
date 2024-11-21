@@ -26,7 +26,7 @@ const LoginForm = () => {
                     setTimeout(() => {
                         navigate("/");
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
                 })
                 .catch((error) => {
                     setIsAuthenticated(false);
