@@ -36,8 +36,7 @@ const AddToFavoritesIcon = ({ movie }) => {
     <>
       <IconButton
         aria-label="add rating"
-        onClick={handleOpen} 
-      >
+        onClick={handleOpen} >
         <BookmarkAddIcon color="primary" fontSize="large" />
       </IconButton>
 

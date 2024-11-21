@@ -4,7 +4,7 @@ import LoginForm from "../components/loginForm";
 const LoginPage = () => {
     return (
         <div style={styles.container}>
-            <h2>登录到 TMDb</h2>
+            <h2>Login to TMDb</h2>
             <LoginForm />
         </div>
     );

@@ -181,6 +181,7 @@ const SiteHeader = () => {
           >
             {isAuthenticated ? (
               [
+                <MenuItem key="introduction" >Hi,{userData?.username} </MenuItem>,
                 <MenuItem key="favourites" onClick={() => navigate("/movies/favorites")}>FAVOURITES</MenuItem>,
                 <MenuItem key="watchlist" onClick={() => navigate("/movies/watchlist")}>WATCHLIST</MenuItem>,
                 <MenuItem key="logout" onClick={handleLoginOrLogout}>LOGOUT</MenuItem>
