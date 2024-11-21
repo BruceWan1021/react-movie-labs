@@ -1,5 +1,5 @@
 // import React from "react";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -13,6 +13,11 @@ import MovieReviews from "../movieReviews"
 import { useQuery } from "react-query";
 import { getMovieActors } from "../../api/tmdb-api";
 import {Link} from "react-router-dom"
+import Grid from '@mui/material/Grid';
+import AddRating from '../cardIcons/addRating'
+import AddToFavoritesIcon from '../cardIcons/addToFavorites'
+import AddToPalylist from '../cardIcons/addToPlaylist';
+import { MoviesContext } from "../../context/moviesContext";
 
 const root = {
     display: "flex",
@@ -26,6 +31,15 @@ const chip = { margin: 0.5 };
 
 
 const MovieDetails = ({ movie }) => { 
+
+  const { favorites, addToFavorites } = useContext(MoviesContext);
+
+  if (favorites.find((id) => id === movie.id)) {
+    movie.favorite = true;
+  } else {
+    movie.favorite = false
+  }
+
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const { data, error, isLoading, isError } = useQuery(
@@ -52,6 +66,18 @@ const MovieDetails = ({ movie }) => {
         <Typography variant="h6" component="p">
           {movie.overview}
         </Typography>
+
+        <Grid container spacing={2} direction="row" alignItems="center">
+          <Grid item>
+            <AddRating movie={movie} />
+          </Grid>
+          <Grid item>
+            <AddToFavoritesIcon movie={movie} />
+          </Grid>
+          <Grid item>
+            <AddToPalylist movie={movie} />
+          </Grid>
+        </Grid>
   
         <Paper 
           component="ul" 

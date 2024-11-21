@@ -50,7 +50,7 @@ const LoginForm = () => {
     return (
         <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
             <Typography variant="h4" gutterBottom>
-                TMDb Login
+                TMDB Login
             </Typography>
             {!isAuthenticated ? (
                 <>

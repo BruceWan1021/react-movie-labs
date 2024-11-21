@@ -364,3 +364,29 @@ export const getMovies = () => {
         throw error;
       });
   };
+
+  export const addRating = (sessionId, movieId, mark) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/rating?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          value : mark 
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status_code) {
+          throw new Error(data.status_message || "Something went wrong");
+        }
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error add rating:", error);
+        throw error;
+      });
+  };

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getFavouriteMovies } from '../api/tmdb-api';
 import { getWatchistMovies } from '../api/tmdb-api';
 import { toggleFavorite } from '../api/tmdb-api';
-import { toggleWatchlist } from '../api/tmdb-api'
+import { toggleWatchlist } from '../api/tmdb-api';
+import { addRating} from '../api/tmdb-api'
 
 export const MoviesContext = React.createContext(null);
 
@@ -10,6 +11,7 @@ const MoviesContextProvider = (props) => {
   const [favorites, setFavorites] = useState( [] )
   const [myReviews, setMyReviews] = useState( {} ) 
   const [mustWatch, setMustWatch] = useState( [] )
+  const [rating, setRating] = useState( [] ) 
 
   const addToFavorites = (movie) => {
     const sessionId = sessionStorage.getItem("sessionId");
@@ -87,6 +89,13 @@ const MoviesContextProvider = (props) => {
       .catch((error) => console.error("Error removing from watchlist:", error))
   };
 
+  const addToRating = (movie, rating) => {
+    const sessionId = sessionStorage.getItem("sessionId");
+    setRating( {...rating, [movie.id]: rating} )
+    addRating(sessionId, movie.id, rating)
+    .catch((error) => console.error("Error adding to favourites:", error));
+  }; 
+
   return (
     <MoviesContext.Provider
       value={{
@@ -96,6 +105,7 @@ const MoviesContextProvider = (props) => {
         addReview,
         addToPlaylist,
         removeFromPlaylist,
+        addToRating,
       }}
     >
       {props.children}
