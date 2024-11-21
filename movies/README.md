@@ -1,19 +1,33 @@
 # Assignment 1 - ReactJS app.
 
 Name: Zhenyang Wan
+Number： 20109227
 
 ## Overview.
 
 [A brief statement on the content of this repository.]
 
+This repository is a ReactJS application that allows users to explore, rate, and manage their favorite movies and the movies they want to watch using data from the TMDb API. Also users can  view detailed information about movies and actors. It includes authentication through third-party services, allowing users to log in, manage their movie ratings, add movies to their favorite list and watchlist. The app also provides user interface with Material UI components.
+
 ### Features.
+
 [ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
 
 + add actor list into movie details
 + click actor and jump to actor details
-+ Feature 3
-+ etc
-+ etc
++ jump from actorDetail page to movieDetail page
++ login and logout by third-party authentication
++ add avatar into siteHeader where shows the user's avatar
++ get favourite page and watchlist page only after login
++ add rating function and rating icon
++ add some icons into movieDetail page 
++ use some new components in Material UI
+  + accordion and some relate to it
+  + arrow downward icon
+  + bookmark add icon
+  + dialog and some relate to it 
+  + alert
+  + drawer
 
 ## Setup requirements.
 
@@ -92,31 +106,39 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## API endpoints.
 
 [ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
+
++ Upcoming movies - movie/upcoming
 + Now playing movies - movie/nowplaying
++ Popular movies - movie/popular
 + Actor Details  - actor/:id
 + Actor image  - actor/:id/image
 + Actor movie credits  - actor/:id/movielist
-
-
-e.g.
-+ Discover list of movies - discover/movie
-+ Movie details - movie/:id
-+ Movie genres = /genre/movie/list
++ Request token - authentication/token
++ Create session - authentication/session
++ Account details - account
++ Favourite movies - account/favourite
++ Watchlist movies - account/watchlist
++ Toggle favorite - account/favourite(POST)
++ Toggle watchlist - account/watchlist(POST)
++ Add rating - movie/:id/rating(POST)
 
 
 ## Routing.
 
 [ List the __new routes__ supported by your app and state the associated page.]
 
-+ /movies/nowplaying - displays all now playing movies.
-+ /actors/:id - displays an actor's detail
-+ /blogs/:id/comments - detail view of a particular blog and its comments.
-+ etc.
++ /movies/favourite - displays all the movies added in favourite list - require authentication
++ /movies/nowplaying - displays all now playing movies. - public
++ /actors/:id - displays an actor's detail - public
++ /movies/upcoming - displays all upcoming movies - public
++ /movies/popular - displays all popular movies - public
++ /login - displays a login form - public
++ /movies/watchlist - displays all the movies added in watchlist - require authentication
 
-[If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
+
 
 ## Independent learning (If relevant).
 
-Itemize the technologies/techniques you researched independently and adopted in your project, 
-i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
-(we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).
+I learned to use sessionStorage to storage data in frontend. After the user login, the session id should be storaged and clear until logout.https://blog.csdn.net/weixin_53877433/article/details/117911670 
+
+I learned about the progress of third-party authentication.https://developer.themoviedb.org/reference/intro/authentication
