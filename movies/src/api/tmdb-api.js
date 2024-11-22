@@ -292,9 +292,9 @@ export const getMovies = () => {
       });
   };
 
-  export const getWatchistMovies = (sessionId) => {
+  export const getWatchlistMovies = (sessionId) => {
     return fetch(
-      `https://api.themoviedb.org/3/account/me/watchlist/movies?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
+      `https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
     )
       .then((response) => {
         if (!response.ok) {

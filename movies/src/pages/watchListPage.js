@@ -4,11 +4,11 @@ import { MoviesContext } from "../context/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
-import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
+import RemoveFromWatchlist from "../components/cardIcons/removeFromWatchlist";
 import WriteReview from "../components/cardIcons/writeReview";
 
 const WatchListPage = () => {
-  const {favorites: movieIds } = useContext(MoviesContext);
+  const {mustWatch: movieIds  } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
   const watchMovieQueries = useQueries(
@@ -31,7 +31,6 @@ const WatchListPage = () => {
     return q.data
   });
 
-  const toDo = () => true;
 
   return (
     <PageTemplate
@@ -40,7 +39,7 @@ const WatchListPage = () => {
       action={(movie) => {
         return (
           <>
-            <RemoveFromFavorites movie={movie} />
+            <RemoveFromWatchlist movie={movie} />
             <WriteReview movie={movie} />
           </>
         );

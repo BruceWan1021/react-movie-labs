@@ -160,12 +160,6 @@ const App = () => {
     }
   }, [sessionId]);
 
-  const handleLogout = () => {
-    setSessionId('');
-    sessionStorage.removeItem('sessionId');
-    setIsAuthenticated(false);
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

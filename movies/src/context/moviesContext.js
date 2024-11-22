@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getFavouriteMovies } from '../api/tmdb-api';
-import { getWatchistMovies } from '../api/tmdb-api';
+import { getWatchlistMovies } from '../api/tmdb-api';
 import { toggleFavorite } from '../api/tmdb-api';
 import { toggleWatchlist } from '../api/tmdb-api';
 import { addRating} from '../api/tmdb-api'
@@ -57,20 +57,19 @@ const MoviesContextProvider = (props) => {
 
   const addToPlaylist = (movie) => {
     const sessionId = sessionStorage.getItem("sessionId");
-    let newMustWatch = [];
-    if (!mustWatch.includes(movie.id)){
-      newMustWatch = [...mustWatch, movie.id];
+    if (!mustWatch.includes(movie.id)) {
+      setMustWatch([...mustWatch, movie.id]);
+      toggleWatchlist(sessionId, movie.id, true)
+        .catch((error) => console.error("Error adding to watchlist:", error));
     }
-    setMustWatch(newMustWatch);
-    toggleWatchlist(sessionId, movie.id, true)
-    .catch((error) => console.error("Error adding to watchlist:", error));
   };
+  
 
   useEffect(() => {
     const sessionId = sessionStorage.getItem("sessionId");
     const fetchWatchlistMovies = async () => {
       try {
-        const data = await getWatchistMovies(sessionId);
+        const data = await getWatchlistMovies(sessionId);
         const movieIds = data.results.map(movie => movie.id);
         setMustWatch(movieIds);
       } catch (error) {
@@ -80,14 +79,14 @@ const MoviesContextProvider = (props) => {
     fetchWatchlistMovies();
   }, []);
 
-  const removeFromPlaylist = (movie) => {
-    const sessionId = sessionStorage.getItem("sessionId");
-    setMustWatch( favorites.filter(
-      (mId) => mId !== movie.id
-    ) )
-    toggleWatchlist(sessionId, movie.id, false)
-      .catch((error) => console.error("Error removing from watchlist:", error))
-  };
+    const removeFromPlaylist = (movie) => {
+      const sessionId = sessionStorage.getItem("sessionId");
+      setMustWatch( mustWatch.filter(
+        (mId) => mId !== movie.id
+      ) )
+      toggleWatchlist(sessionId, movie.id, false)
+        .catch((error) => console.error("Error removing from watchlist:", error))
+    };
 
   const addToRating = (movie, rating) => {
     const sessionId = sessionStorage.getItem("sessionId");
@@ -100,6 +99,7 @@ const MoviesContextProvider = (props) => {
     <MoviesContext.Provider
       value={{
         favorites,
+        mustWatch,
         addToFavorites,
         removeFromFavorites,
         addReview,
