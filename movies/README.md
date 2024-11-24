@@ -18,10 +18,12 @@ This repository is a ReactJS application that allows users to explore, rate, and
 + jump from actorDetail page to movieDetail page
 + login and logout by third-party authentication
 + add avatar into siteHeader where shows the user's avatar
-+ get favourite page and watchlist page only after login
++ get favourite page and watchlist page only after login and get movies from TMDB api
 + add rating function and rating icon
 + add some icons into movieDetail page 
 + accomplish the pagination feature
++ add filter by rating into filter card
++ add sort to filter card
 + use some new components in Material UI
   + accordion and some relate to it
   + arrow downward icon
@@ -30,6 +32,8 @@ This repository is a ReactJS application that allows users to explore, rate, and
   + alert
   + drawer
   + pagination
+  + select
+  + slice
 
 
 ## Setup requirements.
