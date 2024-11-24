@@ -1,7 +1,9 @@
-export const getMovies = () => {
-    return fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
-    ).then((response) => {
+export const getMovies = ({ queryKey }) => {
+  const [, page] = queryKey; // 第二个元素是页码
+  return fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+  )
+    .then((response) => {
       if (!response.ok) {
         return response.json().then((error) => {
           throw new Error(error.status_message || "Something went wrong");
@@ -10,10 +12,10 @@ export const getMovies = () => {
       return response.json();
     })
     .catch((error) => {
-        throw error
+      throw error;
     });
-  };
-  
+};
+
   export const getMovie = (args) => {
     //console.log(args)
     const [, idPart] = args.queryKey;

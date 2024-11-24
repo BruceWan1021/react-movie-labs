@@ -21,6 +21,7 @@ This repository is a ReactJS application that allows users to explore, rate, and
 + get favourite page and watchlist page only after login
 + add rating function and rating icon
 + add some icons into movieDetail page 
++ accomplish the pagination feature
 + use some new components in Material UI
   + accordion and some relate to it
   + arrow downward icon
@@ -28,6 +29,8 @@ This repository is a ReactJS application that allows users to explore, rate, and
   + dialog and some relate to it 
   + alert
   + drawer
+  + pagination
+
 
 ## Setup requirements.
 
